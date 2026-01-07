@@ -5,8 +5,9 @@ import { CreateWorkDialog } from '@/components/works/create-work-dialog'
 import { WorksList } from '@/components/works/works-list'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
-export default async function AppDashboardPage() {
+async function DashboardContent() {
   const supabase = await createClient()
   const {
     data: { user },
@@ -20,7 +21,7 @@ export default async function AppDashboardPage() {
   const works = await getUserWorks(user.id)
 
   return (
-    <div className="w-full">
+    <>
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Your Works</h1>
@@ -59,6 +60,16 @@ export default async function AppDashboardPage() {
           </Button>
         </div>
       )}
+    </>
+  )
+}
+
+export default function AppDashboardPage() {
+  return (
+    <div className="w-full">
+      <Suspense fallback={<div>Loading...</div>}>
+        <DashboardContent />
+      </Suspense>
     </div>
   )
 }
