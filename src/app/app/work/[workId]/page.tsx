@@ -2,7 +2,6 @@ import { createClient } from '@/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import {
   getWorkWithChapters,
-  getProfile,
   getWorkShares,
 } from '@/lib/db/queries'
 import { WorkSettings } from '@/components/works/work-settings'
@@ -28,7 +27,6 @@ export default async function WorkManagePage({ params }: PageProps) {
     redirect('/auth/login')
   }
 
-  const profile = await getProfile(user.id)
   const work = await getWorkWithChapters(workId)
 
   if (!work) {
