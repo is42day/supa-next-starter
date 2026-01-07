@@ -20,7 +20,7 @@ export default async function AppDashboardPage() {
   const works = await getUserWorks(user.id)
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
+    <div className="w-full">
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Your Works</h1>
